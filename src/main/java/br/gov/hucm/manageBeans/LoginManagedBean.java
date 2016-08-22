@@ -1,5 +1,7 @@
 package br.gov.hucm.manageBeans;
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -15,7 +17,7 @@ public class LoginManagedBean {
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private Usuario usuario = new Usuario();
 
-	public String envia() {
+	public String envia() throws IOException {
 
 		usuario = usuarioDAO.getUsuario(usuario.getNomeUsuario(), usuario.getSenha());
 		if (usuario == null) {
@@ -24,6 +26,7 @@ public class LoginManagedBean {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário não encontrado!", "Erro no Login!"));
 			return null;
 		} else {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("pages/index.xhtml"); 
 			return "/main";
 		}
 	}
