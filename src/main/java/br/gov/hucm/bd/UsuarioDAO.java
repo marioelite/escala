@@ -15,11 +15,8 @@ public class UsuarioDAO {
 	public Usuario getUsuario(String nomeUsuario, String senha) {
 
 		try {
-			Usuario usuario = (Usuario) em
-                    .createQuery(
-                                "SELECT u from Usuario u where u.nomeUsuario = :name and u.senha = :senha")
-                    .setParameter("name", nomeUsuario)
-                    .setParameter("senha", senha).getSingleResult();
+			Usuario usuario = (Usuario) em.createQuery("SELECT u from Usuario u where u.nomeUsuario = :name and u.senha = :senha")
+					.setParameter("name", nomeUsuario).setParameter("senha", senha).getSingleResult();
 			return usuario;
 		} catch (NoResultException e) {
 			return null;
@@ -45,5 +42,4 @@ public class UsuarioDAO {
 			return false;
 		}
 	}
-
 }

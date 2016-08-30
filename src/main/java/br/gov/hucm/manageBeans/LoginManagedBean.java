@@ -19,14 +19,14 @@ public class LoginManagedBean {
 
 	public String envia() throws IOException {
 
-		usuario = usuarioDAO.getUsuario(usuario.getNomeUsuario(), usuario.getSenha());
-		if (usuario == null) {
-			usuario = new Usuario();
+		setUsuario(usuarioDAO.getUsuario(usuario.getNomeUsuario(), usuario.getSenha()));
+		if (getUsuario() == null) {
+			setUsuario(new Usuario());
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário não encontrado!", "Erro no Login!"));
 			return null;
 		} else {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("pages/index.xhtml"); 
+			FacesContext.getCurrentInstance().getExternalContext().redirect("pages/index.xhtml");
 			return "/main";
 		}
 	}
