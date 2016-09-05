@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<title>Escalas</title>
 	<style type="text/css">
@@ -15,9 +16,8 @@
 </h:head>
 <h:body style="padding-top: 250px;">
 	<b:container>
-		<b:image library="images" name="logo.jpg" style="max-width : 350px; padding: 20px; margin: 0 auto;"/>
-		<h:form styleClass="form-signin" prependId="false">
-			<p:messages id="messages" />
+	<h:form styleClass="form-signin" prependId="false">
+			<img src="logo.png" width="300" height="100" align="right" hspace="5" vspace="5"/>
 			<p:outputLabel value="Nome Usuário:" />
 			<b:inputText id="nomeUsuario" value="#{LoginMB.usuario.nomeUsuario}">
 				<f:facet name="prepend">
@@ -34,6 +34,7 @@
 			</b:inputText>
 			<b:commandButton look="primary btn-block" value="Entrar"
 				icon="log-in" size="lg" action="#{LoginMB.envia}" />
+			<p:messages id="messages" />
 		</h:form>
 	</b:container>
 </h:body>

@@ -11,6 +11,9 @@
 
 		<!-- entidade mapeada -->
 		<class>br.gov.hucm.entidades.Usuario</class>
+		<class>br.gov.hucm.entidades.Enfermeiro</class>
+		<class>br.gov.hucm.entidades.Feriados</class>
+		<class>br.gov.hucm.entidades.Setor</class>
 
 		<properties>
 

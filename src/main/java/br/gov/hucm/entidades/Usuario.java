@@ -1,22 +1,26 @@
 package br.gov.hucm.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_usuario")
-public class Usuario {
+@Table(name = "tb_usuarios")
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "id_usuario", nullable = false, unique = true)
 	private int id;
 
-	@Column(name = "name", nullable = false, unique = true)
+	@Column(name = "nm_usuario", nullable = false, unique = true)
 	private String nomeUsuario;
 
-	@Column(name = "senha", nullable = false, unique = false)
+	@Column(name = "sn_usuario", nullable = false, unique = false)
 	private String senha;
 
 	// @Column(name = "lastAccess", unique = true)
