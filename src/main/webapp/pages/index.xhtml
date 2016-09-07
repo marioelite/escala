@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -7,50 +5,51 @@
 
 <h:head>
 </h:head>
+<script type="text/javascript">
+function start() {
+    PF('statusDialog').show();
+}
+ 
+function stop() {
+    PF('statusDialog').hide();
+}
+</script>
 <h:body>
-<h:form>
-    <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
-        <h:outputLabel for="basic" value="Basic Spinner: " />
-        <p:spinner id="basic" value="#{spinnerView.number1}" />
- 
-        <h:outputLabel for="step" value="Step Factor: " />
-        <p:spinner id="step" value="#{spinnerView.number2}" stepFactor="0.25" />
- 
-        <h:outputLabel for="minMax" value="Min/Max: " />
-        <p:spinner id="minMax" value="#{spinnerView.number3}" min="0" max="100" />
- 
-        <h:outputLabel for="prefix" value="Prefix: " />
-        <p:spinner id="prefix" value="#{spinnerView.number4}" prefix="$" min="0" />
- 
-        <h:outputLabel for="ajaxSpinner" value="Ajax Spinner: " />
-        <p:outputPanel>
-            <p:spinner id="ajaxSpinner" value="#{spinnerView.number5}">
-                <p:ajax update="ajaxSpinnerValue" process="@this" />
-            </p:spinner>
-            <h:outputText id="ajaxSpinnerValue" value="#{spinnerView.number5}" style="padding-left: 10px" />
-        </p:outputPanel>
-    </h:panelGrid>
- 
-    <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" />
- 
-    <p:dialog header="Values" widgetVar="dlg" showEffect="fold" hideEffect="fold">
-        <h:panelGrid id="display" columns="2" cellpadding="5">
-            <h:outputText value="Value 1: " />
-            <h:outputText value="#{spinnerView.number1}" />
- 
-            <h:outputText value="Value 2: " />
-            <h:outputText value="#{spinnerView.number2}" />
- 
-            <h:outputText value="Value 3: " />
-            <h:outputText value="#{spinnerView.number3}" />
- 
-            <h:outputText value="Value 4: " />
-            <h:outputText value="#{spinnerView.number4}" />
- 
-            <h:outputText value="Value 5: " />
-            <h:outputText value="#{spinnerView.number5}" />
-        </h:panelGrid>
-    </p:dialog>
-</h:form>
+	<h:form>
+		<p:dialog modal="true" widgetVar="statusDialog" header="Status"
+			draggable="false" closable="false" resizable="false">
+			<p:graphicImage name="../ajax_loading_bar.gif" />
+		</p:dialog>
+		<p:messages id="messages" />
+		<p:panelGrid columns="4">
+
+    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s" action="#{fotoMB.listaFotos}">
+        <p:fileDownload value="#{fotoMB.file}" />
+    </p:commandButton>
+
+			<p:fileUpload fileUploadListener="#{fotoMB.processFileUpload}"
+				mode="advanced" dragDropSupport="false" update="messages"
+				sizeLimit="100000000" fileLimit="10"
+				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="true" />
+
+			<p:commandButton value="Cadastrar" icon="ui-icon-star"
+				action="#{fotoMB.salvaFoto}" update="messages">
+			</p:commandButton>
+
+		<p:commandButton value="Gerar Arquivo" id="ajax" actionListener="#{fotoMB.listaFotos}" styleClass="ui-priority-primary" />		
+
+
+		</p:panelGrid>
+	</h:form>
 </h:body>
 </html>
+
+<!-- <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+    <p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
+</p:dialog>
+ 
+<h:form>
+
+</h:form>
+ 
+ -->
